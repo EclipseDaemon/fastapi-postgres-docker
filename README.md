@@ -32,7 +32,7 @@ No Python, no PostgreSQL installation needed.
 
 1. Clone the repository
 ```bash
-   git clone https://github.com/yourusername/fastapi-postgres-docker.git
+   git clone https://github.com/EclipseDaemon/fastapi-postgres-docker.git
    cd fastapi-postgres-docker
 ```
 
