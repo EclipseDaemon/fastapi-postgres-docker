@@ -1,0 +1,38 @@
+version: "3.8"
+
+services:
+
+  fastapi:
+    build: .
+    container_name: myfastapi_service
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    depends_on:
+      my_postgres:
+        condition: service_healthy
+    networks:
+      - compose_project_network
+  
+  my_postgres:
+    image: postgres:16
+    container_name: my_postgres_service
+    env_file:
+      - .env
+    volumes:
+      - pgData:/var/lib/postgresql/data
+    networks:
+      - compose_project_network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    
+volumes:
+  pgData:
+
+networks:
+  compose_project_network:
+  
